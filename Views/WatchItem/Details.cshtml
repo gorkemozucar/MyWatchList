@@ -1,0 +1,47 @@
+@model MyWatchList.Models.WatchItem
+
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<div class="container mt-4">
+    <h1>Item Details</h1>
+
+    <div>
+        <hr />
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>@Model.Title <span class="badge bg-secondary">@Model.Type</span></h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.IsWatched)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @(Model.IsWatched ? "Yes" : "No")
+                    </dd>
+                    @if (Model.IsWatched && Model.WatchDate.HasValue)
+                    {
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.WatchDate)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.WatchDate.Value.ToShortDateString()
+                        </dd>
+                    }
+                </dl>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div> 
